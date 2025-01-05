@@ -5,8 +5,8 @@
 #include <sstream>
 #include <vector>
 
-constexpr int INT_MIN = std::numeric_limits<int>::min();
-constexpr int INT_MAX = std::numeric_limits<int>::max();
+constexpr int MIN = std::numeric_limits<int>::min();
+constexpr int MAX = std::numeric_limits<int>::max();
 
 constexpr char X = 'X';
 constexpr char O = 'O';
@@ -156,11 +156,11 @@ private:
   }
 
   Board minimaxAlphaBeta(const Board& board) const {
-    int bestScore = INT_MIN;
+    int bestScore = MIN;
     Board best;
 
     for (const Board& succ : board.successors(computerCh)) {
-      int score = min(succ, INT_MIN, INT_MAX);
+      int score = min(succ, MIN, MAX);
       if (score > bestScore) {
         best = succ;
         bestScore = score;
@@ -175,7 +175,7 @@ private:
       return finalScore(board);
     }
 
-    int bestScore = INT_MAX;
+    int bestScore = MAX;
     for (const Board& succ : board.successors(playerCh)) {
       bestScore = std::min(bestScore, max(succ, alpha, beta));
 
@@ -194,7 +194,7 @@ private:
       return finalScore(board);
     }
 
-    int bestScore = INT_MIN;
+    int bestScore = MIN;
     for (const Board& succ : board.successors(computerCh)) {
       bestScore = std::max(bestScore, min(succ, alpha, beta));
 
